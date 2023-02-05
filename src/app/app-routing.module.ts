@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule)
+  },
+  {
+    path: 'anonymous-layout',
+    loadChildren: () => import('./pages/anonymous-layout/anonymous-layout.module').then( m => m.AnonymousLayoutPageModule)
   }
 ];
 @NgModule({

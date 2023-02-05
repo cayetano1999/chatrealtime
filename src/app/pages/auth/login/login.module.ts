@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import { FireDataBaseService } from 'src/app/core/services/firebase/fire-database.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { LoginPage } from './login.page';
     IonicModule,
     LoginPageRoutingModule
   ],
+  providers:[FireDataBaseService],
   declarations: [LoginPage]
 })
 export class LoginPageModule {}

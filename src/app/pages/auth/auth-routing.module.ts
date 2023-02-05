@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'sign-up',
     loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
+    path: 'select-avatar',
+    loadChildren: () => import('./select-avatar/select-avatar.module').then( m => m.SelectAvatarPageModule)
   }
 ];
 

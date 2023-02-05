@@ -36,6 +36,7 @@ ion-input {
     font-weight: 400 !important;
     font-size: 13.33px !important;
     line-height: 120% !important;
+    --padding-start: 10px!important;
 }
 
 ion-textarea {
@@ -47,4 +48,8 @@ ion-textarea {
     font-weight: 400 !important;
     font-size: 13.33px !important;
     line-height: 120% !important;
+}
+
+.text-primary-app{
+    color: #8f27ac!important;
 }

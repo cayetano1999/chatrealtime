@@ -1,9 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>sign-up</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header class="ion-no-border" mode="md">
+   <ion-toolbar color="primary" class="ion-no-border"> 
+    <ion-row class="">
+      <ion-col size="7">
 
-<ion-content>
+        <ion-title class="px-1" style="font-size: 30px;" color="light"><b>Regístrate</b>
+        </ion-title>
+        <p class="px-1 mt-3">Y disfruta de todas las caracteristicas que ofrece <b>ANONYMOUS</b></p>
+      </ion-col> 
+      
+      <ion-col size="5"> <img src="../../../../assets/img/Tablet login-pana.png" alt=""> 
+      </ion-col> 
+    </ion-row>
+  </ion-toolbar>
+  </ion-header>
+<ion-content [fullscreen]="true">
+
+  <ion-grid fixed class="mt-5">
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="emails" placeholder="Email"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input type="passwosrd" placeholder="Pasword"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input type="phone" placeholder="Teléfono"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button mode="ios" expand="block" color="primary" shape="round">
+          Registrarme
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
