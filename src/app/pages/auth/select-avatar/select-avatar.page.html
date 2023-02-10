@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border" mode="md">
-  <ion-toolbar color="primary" class="ion-no-border"> 
+  <ion-toolbar color="light" class="ion-no-border"> 
    <ion-row class="">
      <ion-col size="12">
 
-       <ion-title class="px-1 mt-5 pb-5" style="font-size: 30px;" color="light"><b>Selecciona tu avatar</b>
+       <ion-title class="px-1 "  color="dark"><b>Selecciona tu avatar</b>
        </ion-title>
      </ion-col> 
      
@@ -15,7 +15,7 @@
 <ion-content>
 
 <ion-grid fixed>
-  <ion-row>
+  <ion-row class="mt-5">
     <ion-col size="3" *ngFor="let item of avatars;" style="align-items: center; justify-content: center; display: flex;">
       <ion-avatar  (click)="onSelectAvatar(item)">
         <ion-img [id]="item" style="background-color: #8e63ba;" [src]="urlApiAvatar + item" ></ion-img>
@@ -31,7 +31,7 @@
   <ion-toolbar>
     <div class="float-end">
       <ion-button (click)="setUserUrlAvatar()" *ngIf="avatarSelected" color="secondary" mode="ios">
-        <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        Continuar <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon> 
       </ion-button>
     </div>
   </ion-toolbar>

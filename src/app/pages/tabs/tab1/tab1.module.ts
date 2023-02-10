@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { FireStorageService } from '../../../core/services/firebase/fire-storage.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     FormsModule,
     Tab1PageRoutingModule
   ],
+  providers:[FireStorageService],
   declarations: [Tab1Page]
 })
 export class Tab1PageModule {}

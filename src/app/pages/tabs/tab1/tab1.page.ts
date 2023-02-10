@@ -1,11 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { AnonymousModel } from 'src/app/core/model/anonymous.model';
+import { FireStorageService } from '../../../core/services/firebase/fire-storage.service';
+import { StorageHelper } from '../../../core/helpers/storage.helper';
+import { AlertControllerService } from '../../../core/services/ionic-components/alert-controller.service';
+import { FireDataBaseService } from '../../../core/services/firebase/fire-database.service';
+import { StorageEnum } from '../../../core/enums/storage/storage.enum';
 @Component({
   selector: 'app-tab1',
   templateUrl: './tab1.page.html',
   styleUrls: ['./tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 
-  constructor() {}
+  comment: string = '';
+  @BlockUI() blockUI: NgBlockUI;
+
+  constructor(private fireStorage: FireStorageService, private fireDatabase: FireDataBaseService, private storageHelper: StorageHelper, private alertCtrl: AlertControllerService) {
+    this.fireDatabase._document = 'anonymous_message/'
+  }
+  ngOnInit(): void {
+    
+  }
+
+  anonymousModel: AnonymousModel = new AnonymousModel();
+
+
+
+  uploadPhoto(event:any) {
+    this.blockUI.start('Cargando imágen...');
+    this.fireStorage.uploadImg(event.target.files[0]).then(
+      (res: any) => {
+        if (res) {
+          this.blockUI.stop();
+          this.anonymousModel.urlPiture = res;
+          console.log(res);
+        } 
+      },
+      (error: any) => {
+        
+      }
+    );
+  }
+
+  async sendAnonymous(){
+
+    if(this.anonymousModel.comment.trimStart().length == 0){
+      this.alertCtrl.error('Mensaje vacío', 'El mensaje anonimo no puede estar vacío');
+      return;
+    }
+    this.blockUI.start('Enviando anonimo...');
+    const user = await this.storageHelper.getStorageKey(StorageEnum.USER_DATA);
+    this.anonymousModel.user = user;
+    const result = await this.fireDatabase.add(this.anonymousModel);
+    this.blockUI.stop();
+    this.alertCtrl.show('Anonimo enviado', 'Puedes enviar anonimos cuantas veces quieras. No hay limites!').then(res => {
+      this.anonymousModel = new AnonymousModel();
+    })
+
+
+  }
 
 }

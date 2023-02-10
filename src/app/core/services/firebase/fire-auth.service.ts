@@ -25,4 +25,8 @@ export class FireAuthService {
     loginWithGoogle(){
         return this.ref.signInWithPopup(new firebase.auth.GoogleAuthProvider);
     }
+
+    loginWithGooglePop(){
+        return this.ref.signInWithRedirect(new firebase.auth.GoogleAuthProvider);
+    }
 }

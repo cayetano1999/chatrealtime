@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FireDataBaseService } from '../../../core/services/firebase/fire-database.service';
 import { UserModel } from '../../../core/model/user-model';
 import { Router } from '@angular/router';
+import { StorageHelper } from 'src/app/core/helpers/storage.helper';
+import { StorageEnum } from 'src/app/core/enums/storage/storage.enum';
 
 @Component({
   selector: 'app-select-avatar',
@@ -84,7 +86,7 @@ export class SelectAvatarPage implements OnInit {
   ]
   avatarSelected: string = '';
 
-  constructor(private fireDatabase: FireDataBaseService, private router: Router) {
+  constructor(private fireDatabase: FireDataBaseService, private router: Router, private storageHelper: StorageHelper) {
     this.fireDatabase._document = 'users/'
    }
 
@@ -104,13 +106,15 @@ export class SelectAvatarPage implements OnInit {
   }
 
   async setUserUrlAvatar(){
-    debugger;
     let user = await this.fireDatabase.get('users/', 'email', 'operezfire@gmail.com');
     user = JSON.parse(JSON.stringify(user)) as any;
     let key = Object.keys(user)[0];
     let data = user[key as keyof Object] as any;
     data.urlPhotoAvatar = this.urlApiAvatar + this.avatarSelected;
     await this.fireDatabase.update(key, data);
+    await this.storageHelper.setStorageKey(StorageEnum.USER_DATA, data);
+    await this.storageHelper.setStorageKey(StorageEnum.USER_FIRE_KEY, key);
+
     this.router.navigate(['tabs/tab1']);
 
   }

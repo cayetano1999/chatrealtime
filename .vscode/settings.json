@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/4ed70c7d-0d8a-44b3-838c-2fb8b3850edb/AppServices/subscriptions/4ed70c7d-0d8a-44b3-838c-2fb8b3850edb/resourceGroups/anonymous-app/providers/Microsoft.Web/sites/anonymous-app",
+    "appService.deploySubpath": "www"
+}

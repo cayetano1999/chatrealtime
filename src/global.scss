@@ -39,14 +39,11 @@ ion-input {
     --padding-start: 10px!important;
 }
 
-ion-textarea {
-    height: 56px !important;
-    background: #EDEDED !important;
+textarea {
     border-radius: 8px !important;
-    -webkit-padding-start: 20px !important;
+    -webkit-padding-start: 10px !important;
     font-style: normal !important;
     font-weight: 400 !important;
-    font-size: 13.33px !important;
     line-height: 120% !important;
 }
 

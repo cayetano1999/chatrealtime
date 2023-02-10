@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as firebaseApp from '../../node_modules/firebase/app';
+import { StorageHelper } from './core/helpers/storage.helper';
 
 @Component({
   selector: 'app-root',

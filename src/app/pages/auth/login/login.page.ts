@@ -6,6 +6,10 @@ import { UserGoogleData } from '../../../core/model/google-user.model';
 import { FireDataBaseService } from '../../../core/services/firebase/fire-database.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { UserModel } from '../../../core/model/user-model';
+import { StorageHelper } from '../../../core/helpers/storage.helper';
+import { StorageEnum } from 'src/app/core/enums/storage/storage.enum';
+import { StatusBar, Style } from '@capacitor/status-bar';
+
 
 @Component({
   selector: 'app-login',
@@ -18,15 +22,25 @@ export class LoginPage implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
 
-  constructor(private authService: FireAuthService, private fireDataBaseService: FireDataBaseService, private router: Router, private alertCtrl: AlertControllerService) { 
+  constructor(
+    private authService: FireAuthService, 
+    private fireDataBaseService: FireDataBaseService, 
+    private router: Router, 
+    private alertCtrl: AlertControllerService,
+    private storageHelper: StorageHelper
+    ) { 
     this.fireDataBaseService._document = 'users/';
   }
 
   ngOnInit() {
+    StatusBar.setOverlaysWebView({overlay:true});
+    StatusBar.setStyle({style: Style.Default})
+    StatusBar.show();
   }
 
   loginWithGoogle(){
     this.blockUI.start('Iniciando sesión con Google');
+    this.storageHelper.clear();
     this.authService.loginWithGoogle().then(res=> {
       console.log(res);
       this.googleUserData = res?.user as any;
@@ -48,18 +62,23 @@ export class LoginPage implements OnInit {
   }
 
   async addUserInFirebase(userData: UserModel){
-    debugger;
+    ;
     let exist = await this.fireDataBaseService.get('users/','email', userData.email);
     exist = JSON.parse(JSON.stringify(exist));
     console.log(exist);
 
     if(!exist){
       const res = await this.fireDataBaseService.add(userData);
+      await this.storageHelper.setStorageKey(StorageEnum.USER_DATA, userData);
+      this.router.navigate(['auth/select-avatar']);
+
     }
 
     if(exist && userData.urlPhotoAvatar.length == 0){
-      this.router.navigate(['auth/select-avatar'])
+      await this.storageHelper.setStorageKey(StorageEnum.USER_DATA, userData);
+      this.router.navigate(['auth/select-avatar']);
     }
+    await this.storageHelper.setStorageKey(StorageEnum.IS_LOGIN, true);
     this.blockUI.stop();
   }
 

@@ -20,7 +20,7 @@ export class FireDataBaseService {
 
 
     add(data: any) {
-        debugger;
+        ;
         const newItem = firebaseDatabase.database().ref(this._document);
         newItem.push(data, complete => {
             console.log(complete);
@@ -28,7 +28,7 @@ export class FireDataBaseService {
     }
 
     update(key: string, data: any) {
-        debugger;
+        ;
         return firebaseDatabase.database().ref(this._document + key).update(data);
     }
 
