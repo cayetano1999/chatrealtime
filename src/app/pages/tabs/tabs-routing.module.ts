@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanActivateGuard } from 'src/app/core/guard/can-activate.guard';
 import { TabsPage } from './tabs.page';
+import { Tab4PageModule } from './tab4/tab4.module';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
         loadChildren: () => import('../tabs/tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'tab4',
+        loadChildren: () => import('../tabs/tab4/tab4.module').then(m => m.Tab4PageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
@@ -32,6 +37,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/tab1',
     pathMatch: 'full'
+  },
+  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
   }
 ];
 

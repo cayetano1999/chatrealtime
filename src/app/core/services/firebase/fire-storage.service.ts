@@ -15,7 +15,7 @@ export class FireStorageService {
 
     async uploadImg(image: any){
         try {
-            const imageName = 'prueba';
+            const imageName = this.imageName();
             return new Promise((resolve, reject) => {
               const pictureRef = this.fireStorage.ref(this.location + imageName);
               pictureRef
@@ -30,5 +30,10 @@ export class FireStorageService {
                 });
             });
           } catch (e) {}
+    }
+
+    imageName() {
+      const newTime = Math.floor(Date.now() / 1000);
+      return Math.floor(Math.random() * 20) + newTime;
     }
 }

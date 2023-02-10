@@ -16,7 +16,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
   googleUserData: UserGoogleData;
 
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     this.fireDataBaseService._document = 'users/';
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     StatusBar.setOverlaysWebView({overlay:true});
     StatusBar.setStyle({style: Style.Default})
     StatusBar.show();

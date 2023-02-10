@@ -106,7 +106,9 @@ export class SelectAvatarPage implements OnInit {
   }
 
   async setUserUrlAvatar(){
-    let user = await this.fireDatabase.get('users/', 'email', 'operezfire@gmail.com');
+    let info = await this.storageHelper.getStorageKey(StorageEnum.USER_DATA);
+
+    let user = await this.fireDatabase.get('users/', 'email', info?.email);
     user = JSON.parse(JSON.stringify(user)) as any;
     let key = Object.keys(user)[0];
     let data = user[key as keyof Object] as any;

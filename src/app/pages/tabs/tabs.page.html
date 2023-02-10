@@ -11,10 +11,23 @@
       <ion-label>Chat en Vivo</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+    
+
+    <ion-tab-button *ngIf="showOption()"  tab="tab3">
+      <ion-icon name="arrow-redo"></ion-icon>
+      <ion-label>Recibidos</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button *ngIf="showOption()" tab="tab4">
+      <ion-icon name="person"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="out()">
+      <i class="fa fa-arrow-left" style="font-size: 20px;" aria-hidden="true"></i>
+      <ion-label>Salir</ion-label>
+    </ion-tab-button>
+    
   </ion-tab-bar>
 
 </ion-tabs>

@@ -4,11 +4,11 @@ import { AnonymousModel } from 'src/app/core/model/anonymous.model';
 import { snapshortToArray } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: './tab3.page.html',
-  styleUrls: ['./tab3.page.scss']
+  selector: 'app-tab4',
+  templateUrl: './tab4.page.html',
+  styleUrls: ['./tab4.page.scss'],
 })
-export class Tab3Page {
+export class Tab4Page {
 
   ref = firebaseDatabase.database().ref('anonymous_message/');
   anonymouslist: Array<AnonymousModel> = [];
@@ -21,5 +21,4 @@ export class Tab3Page {
       this.anonymouslist.reverse();
     });
   }
-
 }

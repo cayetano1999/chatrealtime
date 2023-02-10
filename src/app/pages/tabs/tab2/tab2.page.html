@@ -12,73 +12,45 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-col size="12">
-        <ion-row>
-          <ion-col size="12">
-            <div id="comments-div" style="max-height:800px; overflow-y:scroll">
-              <ion-list mode="ios">
-                
-                <ion-item *ngFor="let item of [1,2,3,4,5]">
-                  
-                  <ion-label class="ion-text-wrap">
-                    <!-- <div class="alert alert-light" role="alert">
-                      <span>  <span class="text-warning"> <ion-icon name="chatbubble-outline"></ion-icon></span><i> Klk</i></span>
-                    </div> -->
-                    
-                    <ng-container *ngIf="item != 5">
-                    <b>Anonimo </b>  <br>
-                    <div  class="message-body">
-                      <div class="message-main-sender">
-                        <div class="sender">
-                          <div class="message-text">
-                            Thanks n I know its awesome...!
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-container>
+      <ion-col size="12" *ngFor="let item of messageList">
 
-                    <ng-container *ngIf="item == 5">
-                    <ion-row>
-                      <ion-col size="12" class="text-end">
-                        <p><b>You</b></p>
-                      </ion-col>
-                    </ion-row>
-                    <div  class="message-body-mine">
-                      <div class="message-main-sender">
-                        <div class="sender">
-                          <div class="message-text">
-                            Thanks n I know its awesome...!
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-container>
-                  
-                  
-                  </ion-label>
-                </ion-item>
-      
-                <!-- <ion-item>
-                  <ion-label>
-                    <b>Josue Cayetano</b> <span class="text-danger"> Canceló su voto</span>
-                  </ion-label>
-                </ion-item>
-      
-                <ion-item>
-                  <ion-label>
-                    <b>Eilyn Vargas </b> <span class="text-warning"> <ion-icon name="chatbubble-outline"></ion-icon></span> <span>  <br><u>Por el futuro de la nacion</u></span>
-                  </ion-label>
-                </ion-item> -->
-      
-      
-              </ion-list>
-              </div>
-          </ion-col>
-          <ion-col size="6"></ion-col>
-        </ion-row>
+
+        <ion-card *ngIf="!madeByUser(item)" mode="ios" style="margin: 0px 0px!important;">
+          <ion-card-subtitle class="mx-3 mt-3 text-dark"> 
+            <i class="fa fa-user-secret text-danger" aria-hidden="true"></i> Anonimo
+          
+            <div class="float-end">
+              <i class="fa fa-clock-o text-warning" aria-hidden="true"></i> {{item?.date}}
+            </div>
+          
+          </ion-card-subtitle>
+        
+          <ion-card-content>
+          
+            <p [innerHtml]="item?.message" style="white-space: pre-wrap;"></p>
+          </ion-card-content>
+
+          
+        </ion-card>
+
+        <ion-card color="primary" *ngIf="madeByUser(item)" mode="ios" style="margin: 0px 0px!important;">
+          <ion-card-subtitle class="mx-3 mt-3 text-light"> 
+            <i class="fa fa-user-secret text-light" aria-hidden="true"></i> Anonimo
+          
+            <div class="float-end">
+              <i class="fa fa-clock-o text-warning" aria-hidden="true"></i> {{item?.date}}
+            </div>
+          
+          </ion-card-subtitle>
+        
+          <ion-card-content>
+          
+            <p [innerHtml]="item?.message" style="white-space: pre-wrap;"></p>
+          </ion-card-content>
+
+          
+        </ion-card>
       </ion-col>
-      <ion-col size="6"></ion-col>
     </ion-row>
   </ion-grid>
 
@@ -90,11 +62,11 @@
     <ion-grid fixed>
       <ion-row>
         <ion-col size="10">
-          <textarea style="height: 60px;" class="form-control" maxlength="50"  placeholder="Escriba un comentario">
+          <textarea [(ngModel)]="model.message" style="height: 60px;" class="form-control"   placeholder="Escriba un comentario">
           </textarea>
         </ion-col>
         <ion-col size="2">
-          <ion-button mode='ios'  class="mt-2" expand="block" shape="round">
+          <ion-button (click)="sendAnonymous()" mode='ios'  class="mt-2" expand="block" shape="round">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
           </ion-button>
         </ion-col>

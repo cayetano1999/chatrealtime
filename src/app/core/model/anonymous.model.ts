@@ -3,7 +3,7 @@ export class AnonymousModel {
     user: UserModel = new UserModel();
     comment: string = '';
     urlPiture: string = '';
-    date: Date = new Date();
+    date: string = ''
 
 
 }
