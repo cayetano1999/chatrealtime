@@ -33,13 +33,14 @@ export class Tab1Page {
       this.fireStorage.uploadImg(event.target.files[0]).then(
         (res: any) => {
           if (res) {
+            this.alertCtrl.show('Resultato', JSON.stringify(res));
             this.blockUI.stop();
             this.anonymousModel.urlPiture = res;
             console.log(res);
           }
         },
         (error: any) => {
-
+          this.alertCtrl.error('Error', JSON.stringify(error));
         }
       );
     }
